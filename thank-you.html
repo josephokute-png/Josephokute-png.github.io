@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Thank you for contacting Okute Joseph">
+  <title>Thank You | Okute Joseph</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Skip link: allows keyboard users to skip the nav -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">OKUTE JOSEPH</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="thank-you-section">
+      <div class="container">
+        <div class="thank-you-content">
+          <i class="fas fa-check-circle success-icon"></i>
+          <h1>Thank You!</h1>
+          <p>Your message has been sent successfully. I'll get back to you as soon as possible.</p>
+          <a href="index.html" class="btn-primary">Back to Home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        <i class="far fa-copyright"></i> <span id="year"></span> Okute Joseph — ICS 2215, 
+        Dept. of Human Nutrition Sciences | JKUAT
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

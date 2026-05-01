@@ -111,7 +111,11 @@
           </div>
           
           <!-- Contact Form -->
-          <form class="contact-form" id="contactForm" action="#" method="POST" novalidate>
+          <form class="contact-form" id="contactForm" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you">
+            <div style="display:none;">
+              <input name="bot-field">
+            </div>
+            <input type="hidden" name="form-name" value="contact" />
             <div class="form-group">
               <label for="name">
                 <i class="fas fa-user"></i> Full Name
@@ -197,46 +201,41 @@
     
     // Form submission handler
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      
       const name = document.getElementById('name').value.trim();
       const email = document.getElementById('email').value.trim();
       const subject = document.getElementById('subject').value;
       const message = document.getElementById('msg').value.trim();
       
-      if (!name) return showToast('Please enter your full name', true);
-      if (!email) return showToast('Please enter your email address', true);
+      if (!name) {
+        e.preventDefault();
+        return showToast('Please enter your full name', true);
+      }
+      if (!email) {
+        e.preventDefault();
+        return showToast('Please enter your email address', true);
+      }
       
       const emailRegex = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
-      if (!emailRegex.test(email)) return showToast('Please enter a valid email address', true);
+      if (!emailRegex.test(email)) {
+        e.preventDefault();
+        return showToast('Please enter a valid email address', true);
+      }
       
-      if (!subject) return showToast('Please select a subject', true);
-      if (!message) return showToast('Please enter your message', true);
-      if (message.length < 10) return showToast('Message should be at least 10 characters', true);
+      if (!subject) {
+        e.preventDefault();
+        return showToast('Please select a subject', true);
+      }
+      if (!message) {
+        e.preventDefault();
+        return showToast('Please enter your message', true);
+      }
+      if (message.length < 10) {
+        e.preventDefault();
+        return showToast('Message should be at least 10 characters', true);
+      }
       
-      const btn = document.querySelector('.submit-btn');
-      const originalText = btn.innerHTML;
-      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        showToast(`✨ Thanks ${name}! Your message has been sent. I'll get back to you soon.`, false);
-        document.getElementById('contactForm').reset();
-        btn.innerHTML = originalText;
-        btn.disabled = false;
-        
-        // Confetti effect
-        const colors = ['#2C7A6E', '#0A2942', '#3E9487', '#FFD966', '#1A3A5C'];
-        for (let i = 0; i < 50; i++) {
-          const confetti = document.createElement('div');
-          confetti.className = 'confetti';
-          confetti.style.left = Math.random() * 100 + '%';
-          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-          confetti.style.animationDelay = Math.random() * 0.5 + 's';
-          document.body.appendChild(confetti);
-          setTimeout(() => confetti.remove(), 2000);
-        }
-      }, 1500);
+      // If validation passes, form will submit to Netlify
+      // No need for fake submission
     });
     
     // Add confetti animation style dynamically
