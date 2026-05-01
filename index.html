@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- REQUIRED for responsive design on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Okute Joseph — Food Science and Nutrition student at JKUAT">
+  <title>Okute Joseph | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Skip link: allows keyboard users to skip the nav -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="image/image 31.jpeg" alt="Okute Joseph" class="logo-img">
+        <span>OKUTE JOSEPH</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <!-- Add class="active" to the current page's link -->
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <img 
+            src="image/image 31.jpeg" 
+            alt="Profile photo of Okute Joseph"
+            class="hero-profile-img"
+            width="220" 
+            height="220">
+          <h1>Hi, I'm <span class="accent">Okute Joseph</span></h1>
+
+          <p class="tagline">
+            Food Science and Nutrition Student · ICS 2215 · JKUAT
+          </p>
+
+          <p>
+            I am a Food Science and Nutrition student with a growing passion for 
+            technology and data-driven solutions. I am particularly interested in 
+            developing digital tools that enhance nutrition, improve health awareness, 
+            and strengthen food systems.
+          </p>
+
+          <div class="hero-btns">
+            <a href="projects.html" class="btn">View My Projects</a>
+            <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK OVERVIEW SECTION -->
+    <section class="overview">
+      <div class="container">
+        <h2>What I Do</h2>
+        <p>
+          I combine my background in nutrition with basic computing skills to explore 
+          innovative solutions in health and food technology. My work focuses on:
+        </p>
+
+        <ul>
+          <li>Nutrition awareness and education</li>
+          <li>Basic web development projects</li>
+          <li>Data-driven health insights</li>
+          <li>Food systems improvement ideas</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="cta">
+      <div class="container">
+        <h2>Interested in working together?</h2>
+        <p>
+          Feel free to explore my projects or reach out if you'd like to collaborate.
+        </p>
+        <a href="contact.html" class="btn">Contact Me</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>
+        &copy; <span id="year"></span> Okute Joseph — ICS 2215, 
+        Dept. of Human Nutrition Sciences
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- REQUIRED for responsive design on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NutriTrace - Smart nutrition tracking system that estimates nutrient loss in cooked and stored foods">
+  <title>NutriTrace | Smart Nutrition Tracker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+      min-height: 100vh;
+      /* Beautiful food/nutrition background image */
+      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.6)), 
+                  url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?w=1600&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: #fff;
+      line-height: 1.5;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 20px;
+      background: #4c9f70;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 30px;
+      z-index: 100;
+      font-weight: 500;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    /* Header */
+    header {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 215, 150, 0.3);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #f9b84a;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f9b84a, #ff8c42);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: #f5f0e6;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover, nav a.active {
+      border-bottom-color: #f9b84a;
+      color: #ffdd99;
+    }
+
+    /* Main card content */
+    .main-card {
+      max-width: 900px;
+      margin: 2rem auto 3rem;
+      background: rgba(30, 25, 20, 0.85);
+      backdrop-filter: blur(16px);
+      border-radius: 48px;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 200, 120, 0.3);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #FFD966, #FFB347);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #e0d6c6;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px dashed rgba(255, 200, 120, 0.4);
+      padding-bottom: 1rem;
+    }
+
+    /* Form styling */
+    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 1.2rem;
+      margin-bottom: 0.4rem;
+      color: #ffe6c7;
+      font-size: 0.9rem;
+      letter-spacing: 0.5px;
+    }
+
+    select, input {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: rgba(20, 18, 16, 0.8);
+      border: 1px solid rgba(255, 200, 120, 0.5);
+      border-radius: 60px;
+      font-size: 1rem;
+      color: #fff3e6;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    select:focus, input:focus {
+      border-color: #f9b84a;
+      box-shadow: 0 0 0 3px rgba(249, 184, 74, 0.3);
+      background: rgba(30, 25, 20, 0.95);
+    }
+
+    button {
+      background: linear-gradient(95deg, #f9a826, #f07e2e);
+      border: none;
+      padding: 0.9rem 1.8rem;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 60px;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 1.8rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.3);
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      background: linear-gradient(95deg, #fcb43a, #ff8c2c);
+      box-shadow: 0 12px 22px rgba(0,0,0,0.4);
+    }
+
+    /* Progress Circle */
+    .progress-container {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+      position: relative;
+    }
+
+    .progress-ring {
+      transform: rotate(-90deg);
+    }
+
+    .ring-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.2);
+      stroke-width: 10;
+    }
+
+    .ring {
+      fill: none;
+      stroke: #f9b84a;
+      stroke-width: 10;
+      stroke-dasharray: 326.56;
+      stroke-dashoffset: 326.56;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.6s ease;
+    }
+
+    .score-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffdd99;
+      text-shadow: 0 2px 6px black;
+    }
+
+    /* Result box */
+    .result {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 32px;
+      padding: 1.2rem;
+      margin: 1rem 0 1.5rem;
+      border-left: 5px solid #f9b84a;
+      font-weight: 500;
+      color: #fef0df;
+    }
+
+    /* Flow section */
+    .flow {
+      background: rgba(0, 0, 0, 0.45);
+      border-radius: 28px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.8rem 0 1rem;
+      text-align: center;
+    }
+
+    .flow h2 {
+      font-size: 1.4rem;
+      margin-bottom: 0.8rem;
+      color: #ffd58c;
+    }
+
+    .flow ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      list-style: none;
+    }
+
+    .flow li {
+      background: rgba(249, 184, 74, 0.2);
+      padding: 0.4rem 1rem;
+      border-radius: 60px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      backdrop-filter: blur(4px);
+    }
+
+    .note {
+      font-size: 0.75rem;
+      text-align: center;
+      opacity: 0.8;
+      margin-top: 1rem;
+    }
+
+    /* Enhanced Founders section with profile pictures and dropdown */
+    .founders {
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 200, 120, 0.3);
+    }
+
+    .founders h3 {
+      font-size: 1.2rem;
+      text-align: center;
+      letter-spacing: 1px;
+      color: #ffcf8a;
+      margin-bottom: 1.5rem;
+    }
+
+    .developers-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .developer-card {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: 1rem;
+      text-align: center;
+      width: 140px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+      border: 1px solid rgba(249, 184, 74, 0.3);
+    }
+
+    .developer-card:hover {
+      transform: translateY(-5px);
+      border-color: #f9b84a;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .developer-card.active {
+      border-color: #f9b84a;
+      background: rgba(249, 184, 74, 0.2);
+      box-shadow: 0 0 15px rgba(249, 184, 74, 0.3);
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 0.8rem;
+      border: 3px solid #f9b84a;
+      background: #2a241e;
+    }
+
+    .developer-name {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #ffdd99;
+      margin-bottom: 0.25rem;
+    }
+
+    .developer-role {
+      font-size: 0.7rem;
+      color: #c0b28a;
+    }
+
+    /* Dropdown profile description section */
+    .profile-description {
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 1.2rem;
+      margin-top: 1rem;
+      border-left: 4px solid #f9b84a;
+      transition: all 0.3s ease;
+    }
+
+    .profile-description.hidden {
+      display: none;
+    }
+
+    .profile-description h4 {
+      color: #ffcf8a;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .profile-description p {
+      color: #e8ddc7;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-description .badge {
+      display: inline-block;
+      background: rgba(249, 184, 74, 0.25);
+      padding: 0.2rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+      color: #ffcf8a;
+    }
+
+    .presentation-link {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid #f9b84a;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+      width: auto;
+      display: inline-block;
+      margin-top: 1rem;
+      box-shadow: none;
+      cursor: pointer;
+    }
+
+    .presentation-link:hover {
+      background: #f9b84a;
+      color: #1e1a14;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      padding: 1.2rem;
+      margin-top: 1rem;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 700px) {
+      .main-card {
+        margin: 1rem;
+        padding: 1.5rem;
+      }
+      h1 {
+        font-size: 1.8rem;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+      .developers-grid {
+        gap: 0.8rem;
+      }
+      .developer-card {
+        width: 110px;
+        padding: 0.8rem;
+      }
+      .profile-pic {
+        width: 65px;
+        height: 65px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">🌿 NUTRITRACE</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="main-card">
+      <h1>🥗 NutriTrace</h1>
+      <p class="subtitle">
+        Smart nutrition tracking system — estimates nutrient loss in cooked & stored foods, helping you preserve optimal dietary value.
+      </p>
+
+      <!-- INPUT SECTION -->
+      <label>🍽️ Select Food Item</label>
+      <select id="foodName">
+        <option value="">— Choose a food —</option>
+        <option value="Spinach">Spinach</option>
+        <option value="Broccoli">Broccoli</option>
+        <option value="Carrots">Carrots</option>
+        <option value="Tomatoes">Tomatoes</option>
+        <option value="Bell Peppers">Bell Peppers</option>
+        <option value="Kale">Kale</option>
+        <option value="Lettuce">Lettuce</option>
+        <option value="Green Beans">Green Beans</option>
+        <option value="Potatoes">Potatoes</option>
+        <option value="Sweet Potatoes">Sweet Potatoes</option>
+        <option value="Chicken Breast">Chicken Breast</option>
+        <option value="Salmon">Salmon</option>
+        <option value="Beef">Beef</option>
+        <option value="Eggs">Eggs</option>
+        <option value="Pork">Pork</option>
+        <option value="Tofu">Tofu</option>
+        <option value="Lentils">Lentils</option>
+        <option value="Beans">Beans</option>
+        <option value="Quinoa">Quinoa</option>
+        <option value="Brown Rice">Brown Rice</option>
+        <option value="Whole Wheat">Whole Wheat</option>
+        <option value="Blueberries">Blueberries</option>
+        <option value="Strawberries">Strawberries</option>
+        <option value="Apples">Apples</option>
+        <option value="Bananas">Bananas</option>
+        <option value="Oranges">Oranges</option>
+      </select>
+
+      <label>🔥 Cooking Method</label>
+      <select id="method">
+        <option value="steam">Steaming</option>
+        <option value="boil">Boiling</option>
+        <option value="fry">Frying / Sauté</option>
+      </select>
+
+      <label>⏱️ Cooking Time (minutes)</label>
+      <input type="number" id="cookTime" placeholder="e.g., 10" value="15">
+
+      <label>❄️ Storage Time (hours)</label>
+      <input type="number" id="storeTime" placeholder="e.g., 24" value="6">
+
+      <button onclick="calculateNutrition()">📊 Analyze Nutrition Retention</button>
+
+      <!-- PROGRESS CIRCLE -->
+      <div class="progress-container">
+        <svg class="progress-ring" width="120" height="120">
+          <circle class="ring-bg" cx="60" cy="60" r="52" stroke="currentColor" stroke-width="10" fill="none"/>
+          <circle class="ring" cx="60" cy="60" r="52" stroke="currentColor" stroke-width="10" fill="none"/>
+        </svg>
+        <div id="scoreText" class="score-text">--%</div>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div id="result" class="result">
+        💡 Select a food, cooking method, time & storage to see nutrient retention score.
+      </div>
+
+      <!-- PROCESS FLOW -->
+      <div class="flow">
+        <h2>⚙️ How NutriTrace Works</h2>
+        <ul>
+          <li>📋 Cooking data recorded</li>
+          <li>🧊 Storage conditions tracked</li>
+          <li>📉 Nutrient loss estimated</li>
+          <li>🔔 Smart nutrition alert</li>
+        </ul>
+      </div>
+
+      <p class="note">
+        * Educational tool based on food science retention models — helps optimize meal prep & reduce nutrient waste.
+      </p>
+
+      <!-- ENHANCED FOUNDERS SECTION with Profile Pictures and Dropdown Descriptions -->
+      <div class="founders">
+        <h3>✨ Meet the Developers</h3>
+        <div class="developers-grid" id="developersGrid">
+          <!-- Developer cards with profile pictures -->
+        </div>
+        
+        <!-- Dropdown profile description panel -->
+        <div id="profileDescription" class="profile-description hidden">
+          <!-- Dynamic content will appear here -->
+        </div>
+        
+        <div style="text-align: center; margin-top: 1rem;">
+          <button onclick="openPresentation()" class="presentation-link">📑 View Presentation</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; <span id="year"></span> NutriTrace — Smart Nutrition Analytics | Food Science Innovation</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Developer profiles data with profile pictures (using UI Avatars + emoji fallback style)
+    const developers = [
+      {
+        id: 0,
+        name: "Joseph Okute",
+        role: "Lead Developer & Nutrition Analyst",
+        bio: "Food Science & Nutrition student passionate about leveraging technology to solve dietary challenges. Leads the core algorithm development for nutrient retention modeling.",
+        skills: ["Python", "Nutrition Science", "Data Analytics", "Web Dev"],
+        icon: "👨‍💻",
+        color: "#f9b84a"
+      },
+      {
+        id: 1,
+        name: "Irene Wanjiku",
+        role: "Frontend & UX Designer",
+        bio: "Creative UI specialist with a background in Human-Computer Interaction. Designed the beautiful NutriTrace interface with focus on accessibility and user experience.",
+        skills: ["HTML/CSS", "UI/UX", "JavaScript", "Figma"],
+        icon: "🎨",
+        color: "#ff8c42"
+      },
+      {
+        id: 2,
+        name: "Betty Muthoni",
+        role: "Food Science Researcher",
+        bio: "Food technologist specializing in nutrient preservation techniques. Provides scientific validation for retention models and advises on cooking method impacts.",
+        skills: ["Food Chemistry", "Research", "Lab Analysis", "Quality Control"],
+        icon: "🔬",
+        color: "#6fcf97"
+      },
+      {
+        id: 3,
+        name: "Marion Achieng",
+        role: "Data Scientist",
+        bio: "Data analyst focused on nutritional datasets. Built the statistical models that estimate nutrient loss based on time and temperature variables.",
+        skills: ["Python", "Pandas", "Statistics", "Machine Learning"],
+        icon: "📊",
+        color: "#e67e22"
+      },
+      {
+        id: 4,
+        name: "Catherine Njeri",
+        role: "Backend Engineer",
+        bio: "Full-stack developer ensuring smooth data flow and API integrations. Working on expanding NutriTrace to support real-time food logging.",
+        skills: ["Node.js", "MongoDB", "APIs", "Cloud"],
+        icon: "⚙️",
+        color: "#f39c12"
+      },
+      {
+        id: 5,
+        name: "Nully Stacy",
+        role: "QA & Community Lead",
+        bio: "Quality assurance specialist and community manager. Ensures NutriTrace delivers accurate results and gathers user feedback for continuous improvement.",
+        skills: ["Testing", "Community Engagement", "Documentation", "Agile"],
+        icon: "🤝",
+        color: "#e84393"
+      }
+    ];
+
+    // Function to render developer cards with profile pictures
+    function renderDeveloperCards() {
+      const grid = document.getElementById('developersGrid');
+      grid.innerHTML = '';
+      developers.forEach(dev => {
+        const card = document.createElement('div');
+        card.className = 'developer-card';
+        card.setAttribute('data-id', dev.id);
+        card.onclick = () => showDeveloperProfile(dev.id);
+        
+        // Profile picture - using emoji avatar with colored background + icon style
+        card.innerHTML = `
+          <div class="profile-pic" style="background: linear-gradient(135deg, ${dev.color}40, ${dev.color}20); display: flex; align-items: center; justify-content: center; font-size: 2.5rem;">
+            ${dev.icon}
+          </div>
+          <div class="developer-name">${dev.name.split(' ')[0]}</div>
+          <div class="developer-role">${dev.role.split(' ').slice(0,2).join(' ')}</div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Show profile description for selected developer (dropdown style)
+    function showDeveloperProfile(devId) {
+      const dev = developers.find(d => d.id === devId);
+      if (!dev) return;
+      
+      const descriptionDiv = document.getElementById('profileDescription');
+      descriptionDiv.classList.remove('hidden');
+      
+      // Highlight active card
+      document.querySelectorAll('.developer-card').forEach((card, idx) => {
+        if (parseInt(card.getAttribute('data-id')) === devId) {
+          card.classList.add('active');
+        } else {
+          card.classList.remove('active');
+        }
+      });
+      
+      // Build profile HTML with full details
+      descriptionDiv.innerHTML = `
+        <h4>
+          <span style="font-size: 1.5rem;">${dev.icon}</span> 
+          ${dev.name}
+          <span style="font-size: 0.8rem; background: ${dev.color}40; padding: 0.2rem 0.6rem; border-radius: 20px;">${dev.role}</span>
+        </h4>
+        <p>${dev.bio}</p>
+        <div style="margin-top: 0.8rem;">
+          ${dev.skills.map(skill => `<span class="badge">🔧 ${skill}</span>`).join('')}
+        </div>
+        <div style="margin-top: 0.8rem; font-size: 0.8rem; color: #ffcf8a;">
+          📧 ${dev.name.toLowerCase().replace(' ', '.')}@nutritrace.com
+        </div>
+      `;
+    }
+
+    // Nutrition calculation logic
+    function calculateNutrition() {
+      const food = document.getElementById('foodName').value;
+      const method = document.getElementById('method').value;
+      let cookTime = parseFloat(document.getElementById('cookTime').value);
+      let storeTime = parseFloat(document.getElementById('storeTime').value);
+      const resultDiv = document.getElementById('result');
+
+      if (!food) {
+        resultDiv.innerHTML = "⚠️ Please select a food item to start analysis.";
+        updateProgressRing(0);
+        document.getElementById('scoreText').innerText = "0%";
+        return;
+      }
+      if (isNaN(cookTime) || cookTime < 0) cookTime = 0;
+      if (isNaN(storeTime) || storeTime < 0) storeTime = 0;
+
+      const foodRetentionMap = {
+        'Spinach': 0.92, 'Broccoli': 0.9, 'Carrots': 0.88, 'Tomatoes': 0.85,
+        'Bell Peppers': 0.86, 'Kale': 0.91, 'Lettuce': 0.84, 'Green Beans': 0.87,
+        'Potatoes': 0.82, 'Sweet Potatoes': 0.83, 'Chicken Breast': 0.78, 'Salmon': 0.8,
+        'Beef': 0.75, 'Eggs': 0.82, 'Pork': 0.74, 'Tofu': 0.85, 'Lentils': 0.84,
+        'Beans': 0.83, 'Quinoa': 0.86, 'Brown Rice': 0.88, 'Whole Wheat': 0.87,
+        'Blueberries': 0.89, 'Strawberries': 0.88, 'Apples': 0.86, 'Bananas': 0.85, 'Oranges': 0.87
+      };
+      let baseRetention = foodRetentionMap[food] || 0.85;
+
+      let methodFactor = 1.0;
+      if (method === 'steam') methodFactor = 0.96;
+      else if (method === 'boil') methodFactor = 0.88;
+      else if (method === 'fry') methodFactor = 0.82;
+
+      let cookingLoss = Math.min(0.45, (cookTime / 45) * 0.3);
+      let storageLoss = Math.min(0.5, (storeTime / 48) * 0.35);
+      
+      let retention = baseRetention * methodFactor * (1 - cookingLoss) * (1 - storageLoss);
+      retention = Math.min(0.98, Math.max(0.15, retention));
+      let percent = Math.round(retention * 100);
+
+      let advice = "";
+      if (percent >= 85) advice = "🌟 Excellent! Your food retains high nutritional value. Great cooking & storage choices!";
+      else if (percent >= 65) advice = "✅ Good retention. Consider shorter cooking or faster cooling to preserve more nutrients.";
+      else if (percent >= 45) advice = "⚠️ Moderate nutrient loss. Try steaming instead of boiling or reduce storage time.";
+      else advice = "🔻 Significant nutrient loss. For best results, minimize cooking time and refrigerate promptly.";
+
+      let extraNote = "";
+      if (method === "boil" && (food === "Spinach" || food === "Broccoli" || food === "Kale"))
+        extraNote = " 💡 Tip: Water-soluble vitamins (C, B) leach in boiling water — use minimal water or repurpose broth.";
+      else if (method === "fry" && (food === "Salmon" || food === "Chicken Breast"))
+        extraNote = " 🔥 High heat may reduce omega-3s — try lower temp or gentle cooking.";
+      
+      resultDiv.innerHTML = `
+        <strong>🍱 ${food}</strong> — ${method === 'steam' ? 'Steamed' : method === 'boil' ? 'Boiled' : 'Fried'} (${cookTime} min) + stored ${storeTime} hrs<br>
+        📊 <strong>Nutrient Retention: ${percent}%</strong><br>
+        🧠 ${advice}${extraNote}<br>
+        <span style="font-size:0.8rem; opacity:0.9;">🔬 Based on retention models: cooking method, time & storage influence vitamin/mineral preservation.</span>
+      `;
+
+      updateProgressRing(percent);
+      document.getElementById('scoreText').innerText = `${percent}%`;
+    }
+
+    function updateProgressRing(percent) {
+      const ring = document.querySelector('.ring');
+      const radius = 52;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (percent / 100) * circumference;
+      if (ring) {
+        ring.style.strokeDasharray = `${circumference}`;
+        ring.style.strokeDashoffset = offset;
+      }
+      if (percent >= 75) ring.style.stroke = "#6fcf97";
+      else if (percent >= 50) ring.style.stroke = "#f9b84a";
+      else ring.style.stroke = "#e67e22";
+    }
+
+    function openPresentation() {
+      alert("📢 NutriTrace Presentation Deck\n\nDeveloped by: Joseph, Irene, Betty, Marion, Catherine, Nully Stacy\n\nInnovative food science tool to reduce nutrient waste. For full presentation slides, contact the team.");
+    }
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDeveloperCards();
+      
+      const ring = document.querySelector('.ring');
+      if (ring) {
+        const radius = 52;
+        const circumference = 2 * Math.PI * radius;
+        ring.style.strokeDasharray = `${circumference}`;
+        ring.style.strokeDashoffset = circumference;
+      }
+      document.getElementById('cookTime').value = 12;
+      document.getElementById('storeTime').value = 5;
+      
+      // Optionally show first developer profile by default
+      setTimeout(() => {
+        showDeveloperProfile(0);
+      }, 100);
+    });
+  </script>
+</body>
+</html>

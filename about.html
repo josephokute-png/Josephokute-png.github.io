@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- REQUIRED for responsive design on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="About Okute Joseph — Food Science and Nutrition student at JKUAT, Data Analyst, CVN Member">
+  <title>Okute Joseph | About</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      line-height: 1.5;
+      color: #1e2a3e;
+      background: #fefaf5;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 20px;
+      background: #2c5f2d;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 30px;
+      z-index: 100;
+    }
+    .skip-link:focus {
+      top: 20px;
+    }
+
+    /* Header */
+    header {
+      background: #1e3a2f;
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #f9b81b;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    nav a {
+      color: #f0f7e6;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.4rem 0;
+      border-bottom: 2px solid transparent;
+      transition: 0.2s;
+    }
+
+    nav a:hover, nav a.active {
+      border-bottom-color: #f9b81b;
+      color: white;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 3rem 0 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .about-left {
+      background: white;
+      border-radius: 28px;
+      padding: 1.8rem;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .profile-img-large {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 4px solid #f9b81b;
+    }
+
+    .about-left h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.25rem;
+      color: #1e3a2f;
+    }
+
+    .role {
+      color: #5a6e4a;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .badge {
+      background: #eef2e2;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #2c5f2d;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2e7d32;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      background: #1e5a20;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #2e7d32;
+      color: #2e7d32;
+    }
+
+    .btn-outline:hover {
+      background: #2e7d32;
+      color: white;
+    }
+
+    .about-right h2 {
+      font-size: 2rem;
+      color: #1e3a2f;
+      margin-bottom: 1rem;
+      border-left: 5px solid #f9b81b;
+      padding-left: 1rem;
+    }
+
+    .about-right p {
+      margin-bottom: 1rem;
+      color: #2d3e2b;
+    }
+
+    /* Dropdown styles */
+    .dropdown {
+      background: #f8f9f0;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      padding: 0.8rem 1.2rem;
+      cursor: pointer;
+      border: 1px solid #e0d8c8;
+    }
+
+    .dropdown summary {
+      font-weight: 700;
+      color: #2c5f2d;
+      cursor: pointer;
+    }
+
+    .dropdown p {
+      margin-top: 0.8rem;
+      padding-left: 0.5rem;
+    }
+
+    /* Experience Section */
+    .experience, .education, .skills {
+      padding: 2rem 0;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      text-align: center;
+      color: #1e3a2f;
+      margin-bottom: 2rem;
+    }
+
+    .experience-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.8rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .exp-header {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .exp-icon {
+      font-size: 2.5rem;
+    }
+
+    .exp-title h3 {
+      font-size: 1.3rem;
+      color: #1e3a2f;
+    }
+
+    .exp-company {
+      color: #5a6e4a;
+      font-weight: 500;
+    }
+
+    .exp-role-badge {
+      display: inline-block;
+      background: #f9b81b20;
+      color: #c97e1a;
+      padding: 0.2rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .exp-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f8f9f0;
+      padding: 0.6rem;
+      border-radius: 12px;
+    }
+
+    /* CVN Section */
+    .cvn-section {
+      padding: 1rem 0 2rem;
+    }
+
+    .cvn-card {
+      background: linear-gradient(135deg, #1e3a2f, #2c5f2d);
+      border-radius: 28px;
+      padding: 2rem;
+      color: white;
+      text-align: center;
+    }
+
+    .cvn-icon {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cvn-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .cvn-tagline {
+      font-style: italic;
+      margin-bottom: 1rem;
+      opacity: 0.9;
+    }
+
+    .cvn-activities {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .activity-badge {
+      background: rgba(255,255,255,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+    }
+
+    /* Education Grid */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .edu-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .edu-card h3 {
+      font-size: 1.2rem;
+      color: #1e3a2f;
+    }
+
+    .edu-institution {
+      color: #5a6e4a;
+      font-weight: 500;
+      margin: 0.5rem 0;
+    }
+
+    .edu-year {
+      font-size: 0.85rem;
+      color: #f9b81b;
+      font-weight: 600;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-category {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+    }
+
+    .skill-category h3 {
+      color: #1e3a2f;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      list-style: none;
+    }
+
+    .skill-list li {
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #eee;
+      color: #4a5b42;
+    }
+
+    /* PHOTO ALBUM SECTION - FIXED: all photos fit perfectly in frames */
+    .photo-album {
+      padding: 3rem 0;
+      background: #f5f3ed;
+    }
+
+    .photo-album h2 {
+      font-size: 2rem;
+      text-align: center;
+      color: #1e3a2f;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #5a6e4a;
+      margin-bottom: 2rem;
+    }
+
+    .album-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .album-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+
+    .album-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* FIX: All images fit perfectly within the frame */
+    .album-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      background: #e9e3d4;
+    }
+
+    .album-details {
+      padding: 1rem 1.2rem 1.2rem;
+      background: white;
+      cursor: pointer;
+    }
+
+    .album-title {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #1e3a2f;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .album-title::-webkit-details-marker {
+      display: none;
+    }
+
+    .album-title::after {
+      content: "▼";
+      font-size: 0.8rem;
+      transition: transform 0.2s;
+    }
+
+    details[open] .album-title::after {
+      transform: rotate(180deg);
+    }
+
+    .album-description {
+      margin-top: 0.8rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid #eee;
+      font-size: 0.85rem;
+      color: #5a6e4a;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer {
+      background: #1e3a2f;
+      color: #d9e3c5;
+      text-align: center;
+      padding: 1.5rem 0;
+      margin-top: 2rem;
+    }
+
+    .cvn-footer {
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 780px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+      .album-grid {
+        grid-template-columns: 1fr;
+      }
+      .album-img {
+        height: 200px;
+      }
+      nav ul {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip link: allows keyboard users to skip the nav -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="image/image 31.jpeg" alt="Okute Joseph" class="logo-img" onerror="this.src='https://placehold.co/45x45/2e7d32/white?text=OJ'">
+        <span>OKUTE JOSEPH</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html" class="active">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="about-section">
+      <div class="container about-grid">
+        <aside class="about-left">
+          <img 
+            src="image/image.jpg.JPG" 
+            alt="Profile photo of Okute Joseph"
+            class="profile-img-large"
+            onerror="this.src='https://placehold.co/300x300/2e7d32/white?text=Okute'">
+          <h3>Okute Joseph</h3>
+          <p class="role">Food Science and Nutrition Student | JKUAT</p>
+          
+          <div class="hero-badges">
+            <span class="badge">🎓 JKUAT 2024</span>
+            <span class="badge">📊 Data Analyst</span>
+            <span class="badge">🤝 CVN Member</span>
+            <span class="badge">🏭 Acting Manager</span>
+          </div>
+          
+          <div class="hero-btns">
+            <a href="projects.html" class="btn">View My Projects</a>
+            <a href="contact.html" class="btn btn-outline">Get In Touch</a>
+          </div>
+        </aside>
+
+        <div class="about-right">
+          <h2>About Me</h2>
+          <p>
+            I am a Food Science and Nutrition student at JKUAT with a strong 
+            interest in technology and its application in improving health and 
+            nutrition systems. I am passionate about using digital tools and 
+            data-driven approaches to address real-world challenges in food and 
+            public health.
+          </p>
+
+          <details class="dropdown">
+            <summary>📖 Biography</summary>
+            <p>
+              My name is Joseph Okute, and I am a dedicated student pursuing a 
+              professional career in nutrition. I have always been passionate 
+              about understanding how food, health, and human biology connect, 
+              and this interest naturally led me into nutrition science.
+            </p>
+            <p>
+              I come from a background where proper nutrition is often overlooked, 
+              yet it plays a crucial role in preventing disease and improving 
+              quality of life. This motivated me to study nutrition so I can 
+              contribute to better health outcomes.
+            </p>
+          </details>
+
+          <details class="dropdown">
+            <summary>🌟 Early Life</summary>
+            <p>
+              I was born and raised in an environment where community, health, 
+              and hard work were highly valued. Growing up, I observed how 
+              nutrition affects everyday life, especially where proper dietary 
+              knowledge is limited. My early experiences sparked my curiosity 
+              about the relationship between diet, health, and human development.
+            </p>
+          </details>
+
+          <details class="dropdown">
+            <summary>🚀 My Journey</summary>
+            <p>Today, I'm proud to be a <strong>Community Voices Network (CVN) member</strong>, using my voice and skills to advocate for better nutrition and health awareness in our communities. My journey continues as I combine nutrition science with data analytics to create meaningful impact.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Experience Section -->
+    <section class="experience">
+      <div class="container">
+        <h2 class="section-title">Current Experience</h2>
+        
+        <div class="experience-card">
+          <div class="exp-header">
+            <div class="exp-icon">🏭</div>
+            <div class="exp-title">
+              <h3>Data Analyst & Accountant Assistant</h3>
+              <p class="exp-company">African Angel Bakery</p>
+            </div>
+          </div>
+          
+          <div class="exp-role-badge">🎯 Acting Manager</div>
+          
+          <div class="exp-desc">
+            <p>Currently serving in a multi-faceted role combining data analysis, financial accounting, and operational management at African Angel Bakery.</p>
+          </div>
+          
+          <div class="exp-highlights">
+            <div class="highlight-item"><span class="highlight-icon">📊</span><span>Analyze production data to identify trends</span></div>
+            <div class="highlight-item"><span class="highlight-icon">💰</span><span>Assist with financial accounting and cost control</span></div>
+            <div class="highlight-item"><span class="highlight-icon">👔</span><span>Serve as Acting Manager, overseeing daily operations</span></div>
+            <div class="highlight-item"><span class="highlight-icon">📈</span><span>Implement data-driven strategies for efficiency</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Community Voices Network Section -->
+    <section class="cvn-section">
+      <div class="container">
+        <div class="cvn-card">
+          <div class="cvn-icon">🤝</div>
+          <h2>Community Voices Network (CVN) Member</h2>
+          <p class="cvn-tagline">Amplifying voices for better nutrition and health awareness</p>
+          <p>As a proud member of Community Voices Network, I actively participate in community outreach programs, health awareness campaigns, and nutrition education initiatives.</p>
+          <div class="cvn-activities">
+            <span class="activity-badge">Health Awareness</span>
+            <span class="activity-badge">Nutrition Education</span>
+            <span class="activity-badge">Community Outreach</span>
+            <span class="activity-badge">Youth Advocacy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="education">
+      <div class="container">
+        <h2 class="section-title">Education Background</h2>
+        
+        <div class="edu-grid">
+          <div class="edu-card">
+            <div class="edu-icon">🎓</div>
+            <h3>BSc Food Science and Nutrition</h3>
+            <p class="edu-institution">Jomo Kenyatta University of Agriculture and Technology</p>
+            <p class="edu-year">Class of 2024</p>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon">🏫</div>
+            <h3>Secondary Education</h3>
+            <p class="edu-institution">Miruriiri Boys High School</p>
+            <p class="edu-year">Completed: 2023</p>
+          </div>
+          <div class="edu-card">
+            <div class="edu-icon">📚</div>
+            <h3>Primary Education</h3>
+            <p class="edu-institution">Damascus Primary School / Makao Junior School</p>
+            <p class="edu-year">Completed: 2019</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills & Expertise Section -->
+    <section class="skills">
+      <div class="container">
+        <h2 class="section-title">Skills & Expertise</h2>
+        
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>📊 Data & Analytics</h3>
+            <ul class="skill-list"><li>Data Analysis & Visualization</li><li>Excel / Spreadsheets</li><li>Financial Accounting</li><li>Production Data Tracking</li></ul>
+          </div>
+          <div class="skill-category">
+            <h3>🥗 Food Science</h3>
+            <ul class="skill-list"><li>Food Chemistry</li><li>Nutrition Assessment</li><li>Quality Control</li><li>Food Safety Standards</li></ul>
+          </div>
+          <div class="skill-category">
+            <h3>🤝 Community & Leadership</h3>
+            <ul class="skill-list"><li>Community Outreach (CVN)</li><li>Team Leadership</li><li>Operations Management</li><li>Health Education</li></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PHOTO ALBUM SECTION - FIXED: All photos fit perfectly within frames -->
+    <section class="photo-album">
+      <div class="container">
+        <h2>My Journey</h2>
+        <p class="section-subtitle">Capturing moments from different aspects of my life</p>
+        
+        <div class="album-grid">
+          <div class="album-card">
+            <img src="image/IMG-20251206-WA0042.jpg" alt="Fun moments" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Fun+Moments'">
+            <details class="album-details">
+              <summary class="album-title">Fun & Adventures</summary>
+              <p class="album-description">Enjoying life's lighter moments with friends and exploring new experiences. Laughter and memories make the journey worthwhile.</p>
+            </details>
+          </div>
+
+          <div class="album-card">
+            <img src="image/pm_1745725235774_cmp.jpg" alt="Studies and learning" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Studies+%26+Learning'">
+            <details class="album-details">
+              <summary class="album-title">Studies & Learning</summary>
+              <p class="album-description">Dedicated to continuous learning in Food Science and Nutrition. Driven by curiosity and the desire to make a positive impact on health.</p>
+            </details>
+          </div>
+
+          <div class="album-card">
+            <img src="image/IMG_2909(1).jpg" alt="Professional work" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Professional+Growth'">
+            <details class="album-details">
+              <summary class="album-title">Professional Growth</summary>
+              <p class="album-description">Developing skills in data analysis and nutrition technology. Working towards meaningful contributions in food systems and public health.</p>
+            </details>
+          </div>
+
+          <div class="album-card">
+            <img src="image/IMG_20250911_120333_871.jpg" alt="Community involvement" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Community+%26+Service'">
+            <details class="album-details">
+              <summary class="album-title">Community & Service</summary>
+              <p class="album-description">Active member of the Community Voices Network (CVN). Passionate about health education and making a difference in people's lives.</p>
+            </details>
+          </div>
+
+          <div class="album-card">
+            <img src="image/nutritrace.jpg.png" alt="Innovation projects" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Innovation+Projects'">
+            <details class="album-details">
+              <summary class="album-title">Innovation & Projects</summary>
+              <p class="album-description">Creating digital solutions like NutriTrace to help people understand nutrition better. Technology meets passion in every project.</p>
+            </details>
+          </div>
+
+          <div class="album-card">
+            <img src="image/4688a2880a42ef5e26ec3f97cab40b94.jpg" alt="Personal moments" class="album-img" onerror="this.src='https://placehold.co/600x400/e8e0d0/5a6e4a?text=Personal+Reflection'">
+            <details class="album-details">
+              <summary class="album-title">Personal Reflection</summary>
+              <p class="album-description">Balancing ambition with mindfulness. Growth comes from both success and challenges. Every moment shapes who we become.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; <span id="year"></span> Okute Joseph — ICS 2215, Dept. of Human Nutrition Sciences</p>
+        <p class="cvn-footer">🤝 Community Voices Network Member</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

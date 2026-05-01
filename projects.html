@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- REQUIRED for responsive design on mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Projects by Okute Joseph — Food Science & Nutrition student at JKUAT, Data Analyst, CVN Member">
+  <title>Okute Joseph | Projects</title>
+  <link rel="stylesheet" href="css/project.css">
+</head>
+<body>
+
+  <!-- Skip link: allows keyboard users to skip the nav -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">OKUTE JOSEPH</a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="projects-section">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <p class="projects-intro">A collection of my work in data analysis, food science, web development, and community health</p>
+        
+        <div class="cards">
+          <!-- Project 1: NutriTrace (Featured Project) -->
+          <article class="card featured">
+            <span class="card-tag">⭐ Featured | Food Tech</span>
+            <h3>NutriTrace - Digital Nutrition Monitoring System</h3>
+            <p>An innovative digital system that bridges the gap between food preparation and actual nutrient intake. Uses IoT sensors and advanced analytics to track cooking and storage conditions, predicting nutrient degradation in prepared foods in real-time.</p>
+            <div class="card-tech">
+              <span>IoT Sensors</span>
+              <span>Predictive Analytics</span>
+              <span>Cloud Computing</span>
+              <span>Nutrition Science</span>
+            </div>
+            <a href="nutritrace.html" class="card-link">View Full Project →</a>
+          </article>
+
+          <!-- Project 2: Bakery Production Analytics -->
+          <article class="card">
+            <span class="card-tag">Data Analysis</span>
+            <h3>Bakery Production Analytics</h3>
+            <p>Developed a data tracking system for African Angel Bakery to monitor daily production, reduce waste, and optimize ingredient usage. Created Excel dashboards to visualize trends and present actionable insights to management.</p>
+            <div class="card-tech">
+              <span>Excel</span>
+              <span>Data Visualization</span>
+              <span>Dashboard</span>
+            </div>
+            <a href="#" class="card-link">View Case Study →</a>
+          </article>
+
+          <!-- Project 3: Personal Portfolio Website -->
+          <article class="card">
+            <span class="card-tag">Web Development</span>
+            <h3>Personal Portfolio Website</h3>
+            <p>Responsive portfolio built with pure HTML5 and CSS3 as part of ICS 2215. Features accessible design, professional branding, and showcases my journey in Food Science and Data Analytics.</p>
+            <div class="card-tech">
+              <span>HTML5</span>
+              <span>CSS3</span>
+              <span>Responsive</span>
+            </div>
+            <a href="index.html" class="card-link">View Live →</a>
+          </article>
+
+          <!-- Project 4: CVN Nutrition Awareness Campaign -->
+          <article class="card">
+            <span class="card-tag">Community Health</span>
+            <h3>CVN Nutrition Awareness Campaign</h3>
+            <p>Led a community outreach initiative through Community Voices Network, educating local families on affordable nutritious meals. Created simple educational materials in English and Swahili, reaching over 100 community members.</p>
+            <div class="card-tech">
+              <span>Community Outreach</span>
+              <span>Health Education</span>
+              <span>Bilingual</span>
+            </div>
+            <a href="#" class="card-link">View Impact →</a>
+          </article>
+
+          <!-- Project 5: Food Chemistry Lab Report -->
+          <article class="card">
+            <span class="card-tag">Food Science</span>
+            <h3>Food Chemistry Lab Report</h3>
+            <p>Conducted experiments on nutrient composition in locally available foods. Analyzed protein content, vitamin stability during cooking, and presented findings to JKUAT department.</p>
+            <div class="card-tech">
+              <span>Lab Analysis</span>
+              <span>Food Chemistry</span>
+              <span>Research</span>
+            </div>
+            <a href="#" class="card-link">View Report →</a>
+          </article>
+
+          <!-- Project 6: ICS2100 IT Project -->
+          <article class="card">
+            <span class="card-tag">Academic</span>
+            <h3>ICS2100: Information Technology Project</h3>
+            <p>Comprehensive IT project for the Food Science & Nutrition department, integrating technology solutions for nutrition monitoring and data management.</p>
+            <div class="card-tech">
+              <span>IT Systems</span>
+              <span>Data Management</span>
+              <span>Nutrition Tech</span>
+            </div>
+            <a href="#" class="card-link">View Details →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <p>&copy; <span id="year"></span> Okute Joseph — ICS 2215, Dept. of Human Nutrition Sciences</p>
+        <p class="cvn-footer">🤝 Community Voices Network Member</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

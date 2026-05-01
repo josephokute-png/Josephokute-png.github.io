@@ -1,0 +1,513 @@
+/* ============================================
+   PROJECTS PAGE STYLES - OKUTE JOSEPH PORTFOLIO
+   ============================================ */
+
+/* === 1. RESET & BOX-SIZING === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === 2. CSS CUSTOM PROPERTIES === */
+:root {
+  --clr-primary: #0a2942;
+  --clr-primary-light: #1a3a5c;
+  --clr-accent: #2c7a6e;
+  --clr-accent-light: #3e9487;
+  --clr-text: #1f2a3e;
+  --clr-text-light: #4a5568;
+  --clr-white: #ffffff;
+  --clr-border: #e2e8f0;
+  --clr-bg-light: #f8fafc;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.12);
+  --radius: 20px;
+  --max-width: 1200px;
+  --transition: all 0.3s ease;
+}
+
+/* === 3. BASE STYLES === */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--clr-text);
+  background: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* === 4. SKIP LINK === */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--clr-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--clr-accent);
+}
+
+/* === 5. HEADER & NAVIGATION === */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  color: var(--clr-accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  color: var(--clr-text-light);
+  font-weight: 500;
+  border-radius: 40px;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  background-color: rgba(44, 122, 110, 0.1);
+  color: var(--clr-accent);
+}
+
+nav a.active {
+  background-color: var(--clr-accent);
+  color: white;
+}
+
+/* === 6. PROJECTS SECTION === */
+.projects-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #f8fafe 0%, #f0f4f9 100%);
+  min-height: 70vh;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  color: var(--clr-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--clr-accent);
+  border-radius: 3px;
+}
+
+.projects-intro {
+  text-align: center;
+  color: var(--clr-text-light);
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* === 7. CARDS GRID === */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* === 8. CARD STYLES === */
+.card {
+  background: var(--clr-white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  border: 1px solid var(--clr-border);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  transition: var(--transition);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--clr-accent), var(--clr-primary));
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover::before {
+  transform: scaleX(1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--clr-accent-light);
+}
+
+/* Featured Card */
+.card.featured {
+  background: linear-gradient(135deg, var(--clr-white) 0%, rgba(44, 122, 110, 0.05) 100%);
+  border: 2px solid var(--clr-accent);
+  position: relative;
+}
+
+.card.featured::after {
+  content: '⭐ Featured';
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: var(--clr-accent);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.3rem 2rem;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.card.featured .card-tag {
+  background: var(--clr-accent);
+  color: white;
+}
+
+/* Card Tag */
+.card-tag {
+  display: inline-block;
+  background: rgba(44, 122, 110, 0.1);
+  color: var(--clr-accent);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  align-self: flex-start;
+  border: 1px solid rgba(44, 122, 110, 0.2);
+  transition: var(--transition);
+}
+
+.card:hover .card-tag {
+  background: var(--clr-accent);
+  color: white;
+}
+
+/* Card Title */
+.card h3 {
+  font-size: 1.3rem;
+  color: var(--clr-primary);
+  margin: 0.2rem 0;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Card Description */
+.card p {
+  font-size: 0.95rem;
+  color: var(--clr-text-light);
+  flex: 1;
+  line-height: 1.6;
+}
+
+/* Tech Stack */
+.card-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0;
+}
+
+.card-tech span {
+  background: var(--clr-bg-light);
+  color: var(--clr-primary);
+  font-size: 0.75rem;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  border: 1px solid var(--clr-border);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.card-tech span:hover {
+  background: var(--clr-accent);
+  color: white;
+  border-color: var(--clr-accent);
+  transform: translateY(-2px);
+}
+
+/* Card Link */
+.card-link {
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--clr-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: gap 0.2s ease;
+  padding: 0.6rem 0;
+  border-top: 1px solid var(--clr-border);
+  text-decoration: none;
+}
+
+.card-link:hover {
+  gap: 0.8rem;
+  color: var(--clr-primary);
+}
+
+/* === 9. FOOTER === */
+footer {
+  background: var(--clr-primary);
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cvn-footer {
+  color: var(--clr-accent-light);
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+/* === 10. ANIMATIONS === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.5s ease forwards;
+  opacity: 0;
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.3s; }
+
+/* === 11. RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  header .container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .projects-intro {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 0;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card h3 {
+    font-size: 1.2rem;
+  }
+
+  .card.featured::after {
+    font-size: 0.6rem;
+    padding: 0.2rem 1.8rem;
+    top: 0.8rem;
+    right: -1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-section {
+    padding: 2rem 0;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .projects-intro {
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+  }
+
+  .card {
+    padding: 1.2rem;
+  }
+
+  .card-tag {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.8rem;
+  }
+
+  .card h3 {
+    font-size: 1.1rem;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+  }
+
+  .card-tech span {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.8rem;
+  }
+
+  .card-link {
+    font-size: 0.85rem;
+  }
+
+  .card.featured::after {
+    font-size: 0.55rem;
+    padding: 0.2rem 1.5rem;
+    top: 0.6rem;
+    right: -1.5rem;
+  }
+
+  footer {
+    padding: 1.2rem 0;
+    font-size: 0.8rem;
+  }
+}
+
+/* === 12. UTILITY CLASSES === */
+.text-center {
+  text-align: center;
+}
+
+.mt-1 {
+  margin-top: 0.5rem;
+}
+
+.mt-2 {
+  margin-top: 1rem;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+
+.mb-2 {
+  margin-bottom: 1rem;
+}
+
+/* === 13. SCROLLBAR STYLING (Optional) === */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--clr-bg-light);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--clr-accent);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-primary);
+}

@@ -1,0 +1,628 @@
+/* ============================================
+   CONTACT PAGE STYLES - WITH MODERN SOCIAL ICONS
+   ============================================ */
+
+/* === 1. RESET & BOX-SIZING === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === 2. CSS CUSTOM PROPERTIES === */
+:root {
+  --clr-primary: #0a2942;
+  --clr-primary-light: #1a3a5c;
+  --clr-accent: #2c7a6e;
+  --clr-accent-light: #3e9487;
+  --clr-text: #1f2a3e;
+  --clr-text-light: #4a5568;
+  --clr-white: #ffffff;
+  --clr-border: #e2e8f0;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.12);
+  --radius: 20px;
+  --max-width: 1200px;
+  --transition: all 0.3s ease;
+}
+
+/* === 3. BASE STYLES === */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--clr-text);
+  background: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* === 4. SKIP LINK === */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--clr-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--clr-accent);
+}
+
+/* === 5. HEADER & NAVIGATION === */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: var(--transition);
+}
+
+.logo:hover {
+  color: var(--clr-accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  color: var(--clr-text-light);
+  font-weight: 500;
+  border-radius: 40px;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  background-color: rgba(44, 122, 110, 0.1);
+  color: var(--clr-accent);
+}
+
+nav a.active {
+  background-color: var(--clr-accent);
+  color: white;
+}
+
+/* === 6. CONTACT SECTION === */
+.contact-section {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 41, 66, 0.88) 0%, rgba(44, 122, 110, 0.88) 100%),
+              url('https://images.unsplash.com/photo-1521791055366-0d553872125f?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+  min-height: calc(100vh - 70px);
+  display: flex;
+  align-items: center;
+}
+
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.contact-section h2 {
+  text-align: center;
+  color: white;
+  font-size: 2.8rem;
+  margin-bottom: 0.5rem;
+  animation: fadeInDown 0.8s ease;
+}
+
+.contact-subtitle {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  animation: fadeInUp 0.8s ease;
+}
+
+/* === 7. CONTACT WRAPPER === */
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* === 8. CONTACT INFO CARDS === */
+.contact-info {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  animation: slideInLeft 0.8s ease;
+}
+
+.info-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.info-header h3 {
+  color: var(--clr-primary);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.info-header p {
+  color: var(--clr-text-light);
+  font-size: 0.9rem;
+}
+
+.info-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background: #f8fafc;
+  border-radius: 16px;
+  transition: var(--transition);
+  cursor: pointer;
+  border: 1px solid var(--clr-border);
+}
+
+.info-card:hover {
+  transform: translateX(8px);
+  background: linear-gradient(135deg, rgba(44, 122, 110, 0.05), rgba(10, 41, 66, 0.05));
+  border-color: var(--clr-accent);
+}
+
+.info-icon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-primary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  color: white;
+  flex-shrink: 0;
+  transition: var(--transition);
+}
+
+.info-card:hover .info-icon {
+  transform: scale(1.05);
+}
+
+.info-details h4 {
+  color: var(--clr-primary);
+  margin-bottom: 0.25rem;
+  font-size: 1rem;
+}
+
+.info-details p {
+  color: var(--clr-text-light);
+  font-size: 0.85rem;
+}
+
+/* === 9. SOCIAL LINKS === */
+.social-links {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--clr-border);
+  text-align: center;
+}
+
+.social-links h4 {
+  color: var(--clr-primary);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.social-icon {
+  width: 44px;
+  height: 44px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: var(--transition);
+  color: var(--clr-text-light);
+  border: 1px solid var(--clr-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-primary));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+}
+
+.social-icon i {
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-5px);
+  border-color: transparent;
+}
+
+.social-icon:hover::before {
+  opacity: 1;
+}
+
+.social-icon:hover i {
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Individual social icon colors on hover (optional) */
+.social-icon:hover i.fa-linkedin-in { color: white; }
+.social-icon:hover i.fa-github { color: white; }
+.social-icon:hover i.fa-twitter { color: white; }
+.social-icon:hover i.fa-instagram { color: white; }
+.social-icon:hover i.fa-facebook-f { color: white; }
+.social-icon:hover i.fa-youtube { color: white; }
+
+/* === 10. CONTACT FORM === */
+.contact-form {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
+  animation: slideInRight 0.8s ease;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  color: var(--clr-primary);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.form-group label i {
+  margin-right: 0.5rem;
+  color: var(--clr-accent);
+  font-size: 0.9rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--clr-border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: var(--transition);
+  background: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--clr-accent);
+  box-shadow: 0 0 0 3px rgba(44, 122, 110, 0.1);
+  transform: translateY(-2px);
+}
+
+.form-group input:hover,
+.form-group select:hover,
+.form-group textarea:hover {
+  border-color: var(--clr-accent-light);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--clr-accent), var(--clr-primary));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-btn i {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.submit-btn:hover i {
+  transform: translateX(3px);
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(44, 122, 110, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* === 11. TOAST NOTIFICATION === */
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  box-shadow: var(--shadow-lg);
+  font-weight: 500;
+}
+
+.toast-message i {
+  font-size: 1.2rem;
+}
+
+.toast-message.show {
+  transform: translateX(0);
+}
+
+.toast-message.error {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* === 12. FOOTER === */
+footer {
+  background: var(--clr-primary);
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+footer i {
+  margin-right: 0.25rem;
+}
+
+/* === 13. ANIMATIONS === */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* === 14. RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  header .container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .contact-section h2 {
+    font-size: 2rem;
+  }
+
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .contact-info {
+    order: 2;
+  }
+
+  .contact-form {
+    order: 1;
+  }
+
+  .toast-message {
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    transform: translateY(100px);
+  }
+
+  .toast-message.show {
+    transform: translateY(0);
+  }
+  
+  .social-icons {
+    gap: 0.8rem;
+  }
+  
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 3rem 0;
+  }
+
+  .contact-section h2 {
+    font-size: 1.6rem;
+  }
+
+  .contact-info,
+  .contact-form {
+    padding: 1.5rem;
+  }
+
+  .info-card {
+    padding: 0.8rem;
+  }
+
+  .info-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .social-icons {
+    gap: 0.6rem;
+  }
+  
+  .social-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+}

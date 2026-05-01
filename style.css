@@ -1,0 +1,457 @@
+/* ============================================
+   HOME PAGE STYLES - OKUTE JOSEPH PORTFOLIO
+   ============================================ */
+
+/* === 1. RESET & BOX-SIZING === */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* === 2. CSS CUSTOM PROPERTIES === */
+:root {
+  --clr-primary: #0d1b2a;
+  --clr-primary-light: #1a2f4a;
+  --clr-accent: #d4af37;
+  --clr-accent-light: #e8c547;
+  --clr-text: #1a1a1a;
+  --clr-text-light: #4a4a4a;
+  --clr-white: #ffffff;
+  --clr-border: #e2e8f0;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.12);
+  --radius: 20px;
+  --max-width: 1200px;
+  --transition: all 0.3s ease;
+}
+
+/* === 3. BASE STYLES === */
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, 'Inter', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--clr-text);
+  background: var(--clr-white);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+/* === 4. SKIP LINK === */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--clr-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  z-index: 9999;
+  text-decoration: none;
+  border-radius: 0 0 8px 8px;
+  font-weight: 500;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--clr-accent);
+}
+
+/* === 5. HEADER & NAVIGATION === */
+header {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--clr-primary);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--clr-accent);
+}
+
+.logo span {
+  display: inline;
+}
+
+.logo:hover {
+  color: var(--clr-accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  text-decoration: none;
+  color: var(--clr-text-light);
+  font-weight: 500;
+  border-radius: 40px;
+  transition: var(--transition);
+}
+
+nav a:hover {
+  background-color: rgba(44, 122, 110, 0.1);
+  color: var(--clr-accent);
+}
+
+nav a.active {
+  background-color: var(--clr-accent);
+  color: white;
+}
+
+/* === 6. HERO SECTION WITH BACKGROUND IMAGE === */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 41, 66, 0.85) 0%, rgba(44, 122, 110, 0.85) 100%),
+              url('../image/image.png1.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 6rem 0;
+  text-align: center;
+  color: white;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hero-profile-img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 4px solid var(--clr-accent);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+  animation: float 3s ease-in-out infinite;
+  transform: scale(1.3);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: fadeInUp 0.8s ease;
+}
+
+.hero .accent {
+  color: #ffd966;
+  border-bottom: 3px solid #ffd966;
+  display: inline-block;
+}
+
+.hero .tagline {
+  font-size: 1.3rem;
+  opacity: 0.95;
+  margin-bottom: 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  display: inline-block;
+  padding: 0.5rem 2rem;
+  border-radius: 60px;
+  backdrop-filter: blur(5px);
+  animation: fadeInUp 0.8s ease 0.1s backwards;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  opacity: 0.95;
+  line-height: 1.7;
+  animation: fadeInUp 0.8s ease 0.2s backwards;
+}
+
+.hero-btns {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease 0.3s backwards;
+}
+
+/* === 7. BUTTONS === */
+.btn {
+  display: inline-block;
+  padding: 0.9rem 2.2rem;
+  background: var(--clr-accent);
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:hover {
+  background: var(--clr-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid white;
+  color: white;
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: white;
+  color: var(--clr-primary);
+  border-color: white;
+}
+
+/* === 8. OVERVIEW SECTION === */
+.overview {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, #f8fafe 0%, #f0f4f9 100%);
+}
+
+.overview h2 {
+  font-size: 2.2rem;
+  color: var(--clr-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.overview > .container > p {
+  text-align: center;
+  color: var(--clr-text-light);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+}
+
+.overview ul {
+  max-width: 600px;
+  margin: 0 auto;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.overview li {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 60px;
+  text-align: center;
+  font-weight: 500;
+  color: var(--clr-accent);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  border: 1px solid var(--clr-border);
+  cursor: pointer;
+}
+
+.overview li:hover {
+  transform: translateY(-3px);
+  background: var(--clr-accent);
+  color: white;
+  border-color: var(--clr-accent);
+}
+
+/* === 9. CALL TO ACTION SECTION === */
+.cta {
+  position: relative;
+  background: linear-gradient(135deg, rgba(10, 41, 66, 0.92) 0%, rgba(44, 122, 110, 0.92) 100%),
+              url('https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  padding: 5rem 0;
+  text-align: center;
+  color: white;
+}
+
+.cta h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  opacity: 0.95;
+}
+
+.cta .btn {
+  background: white;
+  color: var(--clr-primary);
+}
+
+.cta .btn:hover {
+  background: var(--clr-accent);
+  color: white;
+  transform: translateY(-3px);
+}
+
+/* === 10. FOOTER === */
+footer {
+  background: var(--clr-primary);
+  color: rgba(255, 255, 255, 0.75);
+  text-align: center;
+  padding: 1.5rem 0;
+  font-size: 0.85rem;
+}
+
+/* === 11. ANIMATIONS === */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === 12. RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  header .container {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem 0;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero .tagline {
+    font-size: 1rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+
+  .hero-btns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+
+  .overview h2 {
+    font-size: 1.8rem;
+  }
+
+  .overview ul {
+    grid-template-columns: 1fr;
+  }
+
+  .cta h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 4rem 0;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .overview li {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .cta h2 {
+    font-size: 1.5rem;
+  }
+
+  .cta p {
+    font-size: 0.95rem;
+    padding: 0 1rem;
+  }
+}

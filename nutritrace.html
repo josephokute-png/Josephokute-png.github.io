@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NutriTrace - A Digital Nutrition Monitoring System that tracks cooking and storage conditions to predict nutrient degradation in prepared foods">
+  <meta name="author" content="Okute Joseph & Team">
+  <title>NutriTrace | Digital Nutrition Monitoring System</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation Bar */
+    .nav-bar {
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e3c5c;
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
+      color: #3b8b7a;
+    }
+    .btn-tool {
+      background: #3b8b7a;
+      color: white;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-tool:hover {
+      background: #1e3c5c;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1e3c5c 0%, #2c5282 100%);
+      color: white;
+      padding: 4rem 0;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero .tagline {
+      font-size: 1.3rem;
+      opacity: 0.9;
+      margin-bottom: 0.5rem;
+    }
+    .hero .subtitle {
+      font-size: 1rem;
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    /* Team Section */
+    .team-section {
+      background: #334155;
+      color: white;
+      padding: 1.5rem 0;
+    }
+    .team-flex {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+    .team-left h3, .team-right p {
+      margin-bottom: 0.5rem;
+    }
+    .team-left p, .team-right p {
+      color: #cbd5e1;
+    }
+    .team-left strong, .team-right strong {
+      color: #3b8b7a;
+    }
+
+    /* Section Styles */
+    .section {
+      padding: 4rem 0;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .section:nth-child(even) {
+      background-color: #ffffff;
+    }
+    .section:nth-child(odd) {
+      background-color: #f8fafc;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      color: #1e3c5c;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 4px solid #3b8b7a;
+      display: inline-block;
+    }
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #64748b;
+      margin-bottom: 2rem;
+      max-width: 800px;
+    }
+
+    /* Grid Layouts */
+    .grid-4, .grid-3, .grid-2 {
+      display: grid;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .grid-4 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+    /* Cards */
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1);
+      border-color: #3b8b7a;
+    }
+    .card.problem {
+      border-left: 4px solid #e74c3c;
+    }
+    .card.solution {
+      border-left: 4px solid #27ae60;
+    }
+    .card.feature {
+      border-left: 4px solid #3498db;
+    }
+    .card.application {
+      border-left: 4px solid #9b59b6;
+    }
+    .card.benefit {
+      border-left: 4px solid #f39c12;
+    }
+    .card.future {
+      border-left: 4px solid #9b59b6;
+    }
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: #1e3c5c;
+    }
+    .card p {
+      color: #475569;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .card-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #3b8b7a;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Two Column Layout */
+    .two-column {
+      display: flex;
+      gap: 3rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .two-column > div {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    /* Dashboard Preview */
+    .dashboard-preview {
+      background: white;
+      border-radius: 20px;
+      padding: 1.5rem;
+      border: 2px solid #27ae60;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+      height: 180px;
+    }
+    .bar {
+      width: 60px;
+      background: #3b8b7a;
+      border-radius: 8px 8px 0 0;
+      transition: height 0.3s;
+    }
+    .alert-box {
+      padding: 1rem;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
+    .alert-warning {
+      background: #fef3c7;
+      border-left: 4px solid #f59e0b;
+    }
+    .alert-success {
+      background: #d1fae5;
+      border-left: 4px solid #10b981;
+    }
+
+    /* Feature List */
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+    .feature-list li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .feature-list li::before {
+      content: "✓";
+      color: #3b8b7a;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-block;
+      background: #3b8b7a;
+      color: white;
+      padding: 0.75rem 1.8rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover {
+      background: #1e3c5c;
+      transform: translateY(-2px);
+    }
+    .btn-outline {
+      display: inline-block;
+      border: 2px solid #3b8b7a;
+      color: #3b8b7a;
+      padding: 0.7rem 1.6rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover {
+      background: #3b8b7a;
+      color: white;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1e293b;
+      color: #94a3b8;
+      text-align: center;
+      padding: 2rem 0;
+    }
+    .footer a {
+      color: #3b8b7a;
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container { padding: 0 1.5rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .section-title { font-size: 1.8rem; }
+      .nav-bar .container { flex-direction: column; gap: 1rem; }
+      .nav-links { flex-wrap: wrap; justify-content: center; }
+      .team-flex { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+<div class="nav-bar">
+  <div class="container">
+    <a href="index.html" class="logo"> NutriTrace</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <a href="interactive.html" class="btn-tool"> Try Interactive Tool</a>
+  </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <h1>🍽️ NutriTrace</h1>
+    <p class="tagline">A Digital Nutrition Monitoring System</p>
+    <p class="subtitle">Tracking cooking and storage conditions to predict nutrient degradation in prepared foods</p>
+  </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+  <div class="container">
+    <div class="team-flex">
+      <div class="team-left">
+        <h2>👥 Project Team</h2>
+        <p><strong>Okute Joseph</strong> - Team Leader</p>
+        <p><strong>Betty Kinanu</strong> - Researcher</p>
+        <p><strong>Catherine Waithira</strong> - Developer</p>
+        <p><strong>Florence Marion</strong> - Designer</p>
+        <p><strong>Irene Mwaka</strong> - Project Manager</p>
+      </div>
+      <div class="team-right">
+        <p><strong>Course:</strong> Food Science & Nutrition</p>
+        <p><strong>Unit:</strong> Information Technology</p>
+        <p><strong>Unit Code:</strong> ICS2100</p>
+        <p><strong>Institution:</strong> JKUAT</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Current Situation Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> Current Situation</h2>
+    <div class="grid-2" style="margin-top: 1.5rem;">
+      <div class="card problem">
+        <h3>⚠️ The Invisible Crisis</h3>
+        <p>Every day, millions of people consume food that has lost significant nutritional value due to improper cooking and storage—yet they remain completely unaware. A vegetable stir-fry that starts with 100% of its vitamin C can lose up to 50% within hours of cooking. A meal stored overnight may retain less than 40% of its original nutrient content.</p>
+      </div>
+      <div class="card problem">
+        <h3> The Data Gap</h3>
+        <p>Current nutrition labels only reflect ideal laboratory conditions—not real-world preparation. Consumers have no way of knowing how cooking methods (boiling vs. steaming) or storage duration impact the actual nutrients they consume. This data gap leads to poor dietary decisions and suboptimal health outcomes.</p>
+      </div>
+    </div>
+    <div class="grid-2" style="margin-top: 1rem;">
+      <div class="card problem">
+        <h3> Industry Impact</h3>
+        <p>Healthcare facilities, food services, and catering operations struggle to provide accurate post-preparation nutrition data. This affects patient recovery, dietary planning for athletes, and quality assurance in food businesses.</p>
+      </div>
+      <div class="card problem">
+        <h3>🌍 Global Relevance</h3>
+        <p>With rising food insecurity and nutrition-related diseases, understanding and minimizing nutrient loss is more critical than ever. There is an urgent need for accessible tools that help individuals and organizations make informed food decisions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Proposed Solution Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> Proposed Solution: NutriTrace</h2>
+    <p class="section-subtitle">An innovative digital system bridging the gap between food preparation and actual nutrient intake</p>
+    
+    <div class="grid-4">
+      <div class="card solution">
+        <div class="card-number">01</div>
+        <h3>Smart Monitoring</h3>
+        <p>IoT sensors continuously track temperature, time, humidity, and light exposure during cooking and storage.</p>
+      </div>
+      <div class="card solution">
+        <div class="card-number">02</div>
+        <h3>Predictive Analytics</h3>
+        <p>Advanced algorithms predict nutrient degradation based on environmental factors and food type.</p>
+      </div>
+      <div class="card solution">
+        <div class="card-number">03</div>
+        <h3>Real-Time Insights</h3>
+        <p>Users receive instant feedback on nutrient retention through intuitive dashboards and mobile apps.</p>
+      </div>
+      <div class="card solution">
+        <div class="card-number">04</div>
+        <h3>Actionable Alerts</h3>
+        <p>Smart notifications advise optimal consumption windows and storage improvements.</p>
+      </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 2rem;">
+      <a href="index2.html" class="btn-primary"> Try the Interactive Calculator →</a>
+    </div>
+  </div>
+</section>
+
+<!-- System Overview Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> System Overview</h2>
+    <p class="section-subtitle">A sophisticated four-stage process integrating hardware, cloud computing, and user-friendly interfaces</p>
+    
+    <div class="grid-4">
+      <div class="card feature" style="text-align: center;">
+        <div style="font-size: 2.5rem;">📡</div>
+        <h3>1. Data Collection</h3>
+        <p>IoT sensors track temperature, time, humidity, and light exposure</p>
+      </div>
+      <div class="card feature" style="text-align: center;">
+        <div style="font-size: 2.5rem;">☁️</div>
+        <h3>2. Data Transmission</h3>
+        <p>Secure cloud-based analytics platform</p>
+      </div>
+      <div class="card feature" style="text-align: center;">
+        <div style="font-size: 2.5rem;">🧠</div>
+        <h3>3. Analysis</h3>
+        <p>Nutrient degradation models & algorithms</p>
+      </div>
+      <div class="card feature" style="text-align: center;">
+        <div style="font-size: 2.5rem;">📱</div>
+        <h3>4. Visualization</h3>
+        <p>User-friendly dashboard & mobile app</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Key Parameters Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> Key Parameters Tracked</h2>
+    <div class="grid-4">
+      <div class="card">
+        <h3> Cooking Conditions</h3>
+        <p>Temperature and duration of cooking processes, critical for heat-sensitive nutrients like Vitamin C and B vitamins.</p>
+      </div>
+      <div class="card">
+        <h3> Storage Environment</h3>
+        <p>Storage temperature and time, affecting nutrient stability and microbial growth.</p>
+      </div>
+      <div class="card">
+        <h3> Environmental Exposure</h3>
+        <p>Exposure to oxygen and light, which degrades vitamins and antioxidants.</p>
+      </div>
+      <div class="card">
+        <h3> Food Profile</h3>
+        <p>Food type and initial nutrient profile providing baseline data for calculations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Nutrient Degradation Prediction Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> Nutrient Degradation Prediction</h2>
+    
+    <div class="two-column">
+      <div>
+        <h3 style="color: #27ae60; margin-bottom: 1rem;">Advanced Prediction Models</h3>
+        <p>NutriTrace employs scientifically validated degradation models specifically designed for vitamins and minerals. Our system accounts for the unique characteristics of heat-sensitive and light-sensitive nutrients.</p>
+        <ul class="feature-list" style="margin-top: 1rem;">
+          <li>Uses scientific degradation models for vitamins and minerals</li>
+          <li>Accounts for heat-sensitive and light-sensitive nutrients</li>
+          <li>Continuously updates nutrient values post-cooking</li>
+          <li>Provides estimated remaining nutrient percentages</li>
+        </ul>
+      </div>
+      
+      <div class="dashboard-preview">
+        <h3 style="color: #1e3c5c;">Real-Time Dashboard</h3>
+        <div class="chart-bars">
+          <div class="bar" style="height: 120px; background: #27ae60;"></div>
+          <div class="bar" style="height: 90px; background: #f39c12;"></div>
+          <div class="bar" style="height: 60px; background: #e74c3c;"></div>
+          <div class="bar" style="height: 75px; background: #3498db;"></div>
+        </div>
+        <div class="alert-box alert-warning">
+          <strong>⚠️ Alert:</strong> Vitamin C levels have decreased by 35% due to prolonged cooking. Consider consuming within 2 hours.
+        </div>
+        <div class="alert-box alert-success">
+          <strong>✓ Optimal:</strong> Protein and mineral content remain stable. Safe for consumption for up to 48 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- User Interface Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> User Interface & Visualization</h2>
+    <div class="grid-4">
+      <div class="card">
+        <h3> Multi-Platform Access</h3>
+        <p>Mobile and web-based dashboard accessible on smartphones, tablets, and desktop computers.</p>
+      </div>
+      <div class="card">
+        <h3> Visual Indicators</h3>
+        <p>Clear charts, graphs, and color-coded alerts for nutrient loss.</p>
+      </div>
+      <div class="card">
+        <h3> Personalized Recommendations</h3>
+        <p>Smart suggestions for optimal consumption timing.</p>
+      </div>
+      <div class="card">
+        <h3> App Integration</h3>
+        <p>Seamless integration with diet tracking and health apps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Applications Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title"> Applications of NutriTrace</h2>
+    <div class="grid-4">
+      <div class="card application">
+        <h3> Home Kitchens</h3>
+        <p>Helping families maximize nutritional value of meals through smart monitoring.</p>
+      </div>
+      <div class="card application">
+        <h3> Healthcare Facilities</h3>
+        <p>Precise nutrition planning and patient dietary management.</p>
+      </div>
+      <div class="card application">
+        <h3> Food Services</h3>
+        <p>Ensuring consistent food quality and accurate nutrition information.</p>
+      </div>
+      <div class="card application">
+        <h3> Research & Quality</h3>
+        <p>Data-driven analysis for food science research and quality assessment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benefits Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">✨ Benefits</h2>
+    <div class="grid-4">
+      <div class="card benefit">
+        <h3>Enhanced Awareness</h3>
+        <p>Improved nutritional awareness and informed decision-making.</p>
+      </div>
+      <div class="card benefit">
+        <h3>Optimized Nutrition</h3>
+        <p>Reduced nutrient loss through optimized cooking and storage.</p>
+      </div>
+      <div class="card benefit">
+        <h3>Better Planning</h3>
+        <p>Superior dietary planning for patients, athletes, and individuals.</p>
+      </div>
+      <div class="card benefit">
+        <h3>Data-Driven Quality</h3>
+        <p>Consistent nutritional standards through data-driven management.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Future Scope Section -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">🚀 Future Scope</h2>
+    <div class="grid-4">
+      <div class="card future">
+        <h3>🤖 AI Recommendations</h3>
+        <p>Personalized nutrition recommendations tailored to individual health profiles.</p>
+      </div>
+      <div class="card future">
+        <h3>🔌 Smart Integration</h3>
+        <p>Deep integration with smart cookware, refrigerators, and IoT appliances.</p>
+      </div>
+      <div class="card future">
+        <h3> Expanded Database</h3>
+        <p>Comprehensive databases covering thousands of food types worldwide.</p>
+      </div>
+      <div class="card future">
+        <h3>⚡ Predictive Alerts</h3>
+        <p>Advanced alerts for spoilage, quality loss, and optimal consumption windows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="section" style="background: linear-gradient(135deg, #1e3c5c 0%, #2c5282 100%); color: white; text-align: center;">
+  <div class="container">
+    <h2 style="color: white; margin-bottom: 1rem;">Ready to Optimize Your Nutrition?</h2>
+    <p style="margin-bottom: 1.5rem; opacity: 0.9;">Try the NutriTrace interactive calculator to see how cooking and storage affect your food's nutrients.</p>
+    <a href="index2.html" class="btn-primary" style="background: white; color: #1e3c5c; margin-right: 1rem;">🔬 Try Interactive Tool</a>
+    <a href="projects.html" class="btn-outline" style="border-color: white; color: white;">← Back to Projects</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>© <span id="year"></span> NutriTrace Team — Jomo Kenyatta University of Agriculture and Technology</p>
+    <p style="margin-top: 0.5rem; font-size: 0.85rem;">BSc Food Science & Nutrition | Information Technology (ICS2100)</p>
+    <p style="margin-top: 0.5rem;">Developed by: Okute Joseph • Irene Mwaka • Betty Kinanu • Florence Marion • Catherine Waithira</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

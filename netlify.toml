@@ -1,0 +1,94 @@
+# netlify.toml — Enhanced Security Headers for Maximum Protection
+# Includes Content Security Policy (CSP), HSTS, and other security best practices
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Prevent clickjacking attacks
+    X-Frame-Options = "DENY"
+    
+    # Prevent MIME type sniffing
+    X-Content-Type-Options = "nosniff"
+    
+    # Control referrer information
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Restrict browser features (camera, microphone, geolocation, etc.)
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), accelerometer=(), gyroscope=(), speaker=(), vibrate=(), fullscreen=(self)"
+    
+    # HTTP Strict Transport Security (HSTS) — force HTTPS
+    # max-age=31536000 = 1 year, includeSubDomains applies to all subdomains
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    
+    # Content Security Policy (CSP) — prevent XSS and data injection attacks
+    # Adjust as needed for your specific resources
+    Content-Security-Policy = '''
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https://images.unsplash.com https://placehold.co https://*.unsplash.com;
+      connect-src 'self';
+      frame-ancestors 'none';
+      base-uri 'self';
+      form-action 'self';
+      upgrade-insecure-requests;
+    '''
+    
+    # Prevent browsers from caching sensitive data
+    Cache-Control = "no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0"
+    
+    # Cross-Origin Resource Sharing (CORS) — restrict to same origin
+    Access-Control-Allow-Origin = "same-origin"
+    
+    # Cross-Origin Embedder Policy — require explicit permission for cross-origin resources
+    Cross-Origin-Embedder-Policy = "require-corp"
+    
+    # Cross-Origin Opener Policy — isolate browsing context
+    Cross-Origin-Opener-Policy = "same-origin"
+    
+    # Cross-Origin Resource Policy — restrict cross-origin requests
+    Cross-Origin-Resource-Policy = "same-origin"
+
+# Optional: Headers for specific file types (additional protection)
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
+
+# Optional: Disable asset caching for development (uncomment if needed)
+# [[headers]]
+#   for = "/*"
+#   [headers.values]
+#     Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Build settings (optional — configure your build process)
+[build]
+  command = "echo 'No build command specified'"
+  publish = "."
+
+# Redirects for SEO and security (optional)
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://*.netlify.app/*"
+  to = "https://yourdomain.com/:splat"
+  status = 301
+  force = false
